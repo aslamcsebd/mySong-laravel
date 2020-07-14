@@ -283,7 +283,7 @@ class Singer extends Controller{
          // Default         
          $SingerLists = SingerList::where('userId', $userId)->get();
          $allSongsCount = AllSong::where('userId', $userId)->get();
-         $allSongs = AllSong::where('userId', $userId)->orderBy('id', 'DESC')->simplePaginate(5);
+         $allSongs = AllSong::where('userId', $userId)->orderBy('id', 'DESC')->simplePaginate(10);
          $request-> validate(['all_songs'=> 'required']);
          return view('pages/any_delete', compact('SingerLists', 'allSongsCount', 'allSongs'));
       }

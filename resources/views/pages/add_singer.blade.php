@@ -51,7 +51,7 @@
                                  <label for="singerType" class="form-control">Song Type</label>
                               </div>
                               <div class="col">
-                                 <select name="songTypeId" id="singerType" class="form-control" style="padding: 5px;">
+                                 <select name="songTypeId" id="singerType" class="form-control">
                                     <option value="">Select Now</option>
                                     @foreach($Songtypes as $Songtype)
                                        <option value="{{$Songtype->id}}">{{$Songtype->songType}}</option>
@@ -122,3 +122,4 @@
       </div>     
    </div>
 @endsection
+

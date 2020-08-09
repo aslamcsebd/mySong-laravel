@@ -63,9 +63,7 @@ class Singer extends Controller{
 
          $all_songsCount = AllSong::where('userId', $userId)->where('singerNameId', $singerNameId)->get();
          $all_songs = AllSong::where('userId', $userId)
-                     ->where('singerNameId', $singerNameId)
-                     ->simplePaginate(2, ['*'], 'p1');
-         // $all_songs->appends($request->only('singerNameId'));
+                     ->where('singerNameId', $singerNameId)->get();        
          return view('home', compact('SongtypeCount', 'Songtypes', 'SingerListCount', 'SingerLists', 'singerInfos', 'all_songsCount', 'all_songs'));
       }
    //1 Home page end
@@ -199,7 +197,7 @@ class Singer extends Controller{
       public function singerList(){
          $userId = Auth::user()->id;
          $SingerListCount = SingerList::where('userId', $userId)->get();         
-         $SingerLists = SingerList::where('userId', $userId)->simplePaginate(5);
+         $SingerLists = SingerList::where('userId', $userId)->get();
          return view('pages/singer_list', compact('SingerListCount', 'SingerLists'));
       }
    // singer List page start 
@@ -217,7 +215,7 @@ class Singer extends Controller{
       public function all_songType(Request $request){
          $userId = Auth::user()->id;      
          $AllSongtypeCount = Songtype::where('userId', $userId)->get();
-         $AllSongtypes = Songtype::where('userId', $userId)->simplePaginate(5);
+         $AllSongtypes = Songtype::where('userId', $userId)->get();
          // Default         
          $SingerLists = SingerList::where('userId', $userId)->get();
          $request-> validate(['songType'=> 'required']);
@@ -241,7 +239,7 @@ class Singer extends Controller{
          $userId = Auth::user()->id;
          // Default            
          $SingerLists = SingerList::where('userId', $userId)->get();      
-         $AllSingers = SingerList::where('userId', $userId)->simplePaginate(5);
+         $AllSingers = SingerList::where('userId', $userId)->get();
          $AllSingerCount = SingerList::where('userId', $userId)->get();
          $request-> validate(['singerList'=> 'required']);
          return view('pages/any_delete', compact('SingerLists', 'AllSingers', 'AllSingerCount'));
@@ -252,6 +250,11 @@ class Singer extends Controller{
          $userId = Auth::user()->id;
          $singerNameId = SingerList::find($singer_id);
          $singerNameId->delete();
+
+         $singerPhoto = $singerNameId->photo;
+         if ($singerPhoto!='singer_default_image.jpg') {
+            unlink(base_path('public/SingerPhoto/'.$singerPhoto));
+         }
          $singerNameId = $singerNameId->id;
          $SingerLists = AllSong::where('userId', $userId)->where('singerNameId', $singerNameId)->delete();
          return back()->with('success', 'Singer delete successfully');
@@ -266,7 +269,7 @@ class Singer extends Controller{
          // Default
          $SingerLists = SingerList::where('userId', $userId)->get();
          $SongsCount = AllSong::where('userId', $userId)->where('singerNameId', $singerNameId)->get();
-         $Songs = AllSong::where('userId', $userId)->where('singerNameId', $singerNameId)->orderBy('id', 'DESC')->simplePaginate(5);
+         $Songs = AllSong::where('userId', $userId)->where('singerNameId', $singerNameId)->orderBy('id', 'DESC')->get();
          return view('pages/any_delete', compact('SingerLists', 'SongsCount', 'Songs'));
       }
 
@@ -283,7 +286,7 @@ class Singer extends Controller{
          // Default         
          $SingerLists = SingerList::where('userId', $userId)->get();
          $allSongsCount = AllSong::where('userId', $userId)->get();
-         $allSongs = AllSong::where('userId', $userId)->orderBy('id', 'DESC')->simplePaginate(10);
+         $allSongs = AllSong::where('userId', $userId)->orderBy('id', 'DESC')->get();
          $request-> validate(['all_songs'=> 'required']);
          return view('pages/any_delete', compact('SingerLists', 'allSongsCount', 'allSongs'));
       }

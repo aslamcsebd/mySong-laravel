@@ -1,21 +1,21 @@
 <?php
 
-Route::get('/', function () {
-    return view('auth/login');
-});
+// Route::get('/', function () {
+//     return view('auth/login');
+// });
 
+Route::get('/', 'HomeController@login');
 Auth::routes();
 
 // All song button
-// Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/home', 'Singer@index')->name('home');
+Route::get('home', 'Singer@index')->name('home');
 
 // Add Singer button
 Route::get('add_singer', 'Singer@add_singer')->name('add_singer');
+
 // Add Singer page
 Route::post('add_songType', 'Singer@add_songType')->name('add_songType');
 Route::post('add_singer_now', 'Singer@add_singer_now')->name('add_singer_now');
-
 
 // Add song page
 Route::get('add_song', 'Singer@add_song')->name('add_song');
@@ -24,12 +24,9 @@ Route::post('add_song_now', 'Singer@add_song_now')->name('add_song_now');
 // singer list page
 Route::get('singerList', 'Singer@singerList')->name('singerList');
 
-
 // Home page
 Route::get('select_songType', 'Singer@select_songType');
-
 Route::get('select_singerName', 'Singer@select_singerName');
-
 Route::get('any_delete', 'Singer@any_delete');
 
 // Any delete

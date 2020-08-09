@@ -34,16 +34,15 @@
                            @csrf
                            <div class="row justify-content-center">
                               <div class="col">
-                                 <label for="song_Type" class="form-control division">Song Type</label>
+                                 <label for="song_Type_Id" class="form-control">Song Type</label>
                               </div>
                               <div class="col">
                                  <select name="songTypeId" id="song_Type_Id" class="form-control">
                                     <option value="">Select Now</option>
-
                                     <?php
                                        foreach($Songtypes as $Songtype){
                                           echo '<option value="'.$Songtype->id.'">'.$Songtype->songType.'</option>';
-                                          }
+                                       }
                                     ?>
 
                                    {{--  @foreach($Songtypes as $Songtype)
@@ -54,7 +53,7 @@
                            </div>
                            <div class="row justify-content-center">
                               <div class="col">
-                                 <label for="Singer_name" class="form-control division">Singer Name</label>
+                                 <label for="singer_Name_Id" class="form-control">Singer Name</label>
                               </div>
                               <div class="col">
                                  <select name="singerNameId" id="singer_Name_Id" class="form-control">
@@ -68,7 +67,7 @@
 
                            <div class="row justify-content-center">
                               <div class="col">
-                                 <label for="Song Name" class="form-control division">Song Name</label>
+                                 <label for="Song Name" class="form-control">Song Name</label>
                               </div>
                               <div class="col">
                                  <input type="text" name="songName" value="{{ old('songName')}}" class="form-control" id="Song Name" placeholder="Name">
@@ -78,10 +77,10 @@
                               <div class="col">
                                  <div class="input-group">
                                     <div class="input-group-prepend">
-                                       <label class="input-group-text" for="Song Link">Song Link</label>
+                                       <label class="input-group-text" for="songLink">Song Link</label>
                                     </div>
-                                   
-                                    <textarea name="songLink" class="form-control" id="Song Link" placeholder="Youtube link please" aria-label="With textarea">{{ old('songLink')}}</textarea>
+
+                                    <textarea name="songLink" rows="2" type="text" class="form-control" id="songLink" placeholder="Enter Youtube Link" aria-label="With textarea">{{ old('songLink')}}</textarea>
                                  </div>
                               </div>                               
                            </div>

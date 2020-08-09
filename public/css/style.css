@@ -4,13 +4,14 @@
 /*Common code start*/
    html, body { height: 100%; margin: 0; background-color: purple;}
    .wrapper { min-height: 100%; }
-   .navbar .navbar-nav li{ margin-left: 12px; }
+   .navbar .mr-auto li{ margin-left: 12px; }
    .navbar-brand{ padding: 0.3125rem 0.5rem; border-radius: 0.25rem; }
    .dropdown-item:hover, .dropdown-item:focus { color: #000; background-color: cyan; }
    .navbar-light .navbar-brand, 
    .navbar-light .ml-auto .nav-link { color: #fff; }
    .navbar-light .all-item .nav-link { color: #000; }
-
+   .navbar .ml-auto{ border: 1px dashed #fff; }
+   
    .navbar-light .navbar-brand:hover, 
    .navbar-light .navbar-brand:focus { 
       color: #000; background-color: cyan; 
@@ -22,6 +23,7 @@
    }
 
    .navbar img{ width: 35px; height: 35px; border-radius: 50%; padding: 0.1rem; margin: 0px; }
+   .footer .admin{ border-radius: 50%; padding: 0.1rem; }
    .border { padding: 5px; margin: 8px 0px; border-radius: 0.25rem; }
    .card-header { padding: 0.5rem; }
    .card-body { padding: 0.5rem; }
@@ -31,7 +33,8 @@
    .add_singer_page .row label, 
    .add_song_page .row label, 
    .singer_list_page .row label, 
-   .any_delete_page .row label { padding: 0.375rem 0.5rem; }
+   .any_delete_page .row label  { padding: 0.375rem 0.5rem; }
+   .add_singer_page #singerType{ padding: 5px; } 
    .vl { border-left: 2px solid #fff; height: auto; }
    
    .border .row{ border-radius: 0.25rem; }
@@ -41,12 +44,37 @@
 /*Common code end*/
 
 /*1) home_page start*/
-   .table{ margin-bottom: 0rem; } 
+   .table{ margin-bottom: 0rem; border-radius: 2px;} 
    .table-bordered thead td { border-bottom-width: 0px; }
    .card_row { background-color: #145250; }
    .home_page .home_table td { background-color: #82ccdd; }
    .table th, .table td { padding: 0.2rem; }
    .pagination { margin: 0.5rem 0 0.1rem; }
+   .home_page .singleSinger fieldset { margin: 0 -1em 1.5em -1em !important; }
+
+   /*Datatable-home page*/
+   .home_page .singerList .dataTables_wrapper .dataTables_length, 
+   .home_page .singerList .first_table .dataTables_wrapper .dataTables_filter, 
+   .home_page .singerList .dataTables_wrapper .dataTables_info, 
+   .home_page .singerList .first_table .dataTables_wrapper .dataTables_paginate { display: none; }
+
+   .home_page .singerList .dataTables_wrapper .dataTables_paginate { text-align: center; padding: 0.25em 0.20em; }
+
+   .home_page .singerList .first_table table.dataTable thead .sorting, 
+   table.dataTable thead .sorting_asc, 
+   table.dataTable thead td  { background-image: none;  padding: 0;}
+
+   .home_page .singerList table.dataTable tbody th, table.dataTable tbody td { padding: 3px; }
+
+   .home_page .singerList table.dataTable thead .sorting_asc { background-image: none; padding: 2px; }
+
+   .home_page .singerList .first_table table.dataTable td.dataTables_empty{ display: none; }
+   .home_page .singerList .first_table table.dataTable.no-footer { border-bottom: 1px solid #fff; }
+   table.dataTable thead th, 
+   table.dataTable thead td { border-bottom: 0; padding: 3px 0;}
+
+   .home_page .singerList .first_table table.dataTable { border-collapse: collapse; }
+   .home_page .singerList hr { margin: 0; border-top: 1px dashed blue; }
 /*1) home_page end*/
 
 /*2) add_singer start*/
@@ -55,21 +83,30 @@
 /*2) add_singer end*/
 
 /*3) add_song start*/
-   .add_song .input-group{ margin-bottom: 0.5rem; }
+  .add_song .input-group{ margin-bottom: 0.5rem; }
+  .add_song_page #songLink::placeholder { text-align: center; line-height: 40px; } 
 /*3) add_singer end*/
 
 /*4) singer_list start*/
    .singer_list_page tbody{ background-color: #00cec9; color: #fff; }
-   .singerList img{ width: 80px; height: 80px; border-radius: 50%; padding: 0.1rem; margin: 0px; }
+   .singerList img{ width: 80px; height: 80px; border-radius: 50%; padding: 0rem; }
+   .singerList .singerName{ font-style: italic; }
    .singerList .card_row .row{ margin: 0; }
 /*4) singer_list end*/
 
 /*5) any_delete start*/
-   .any_delete_page .Songs img{ width: 50px; height: 50px; border-radius: 50%; padding: 0.1rem; margin: -5px; }
+   .any_delete .singerSong img{ width: 50px; height: 50px; border-radius: 50%; padding: 0.1rem; margin: -5px; }
+
+   /*Datatable any_delete*/
+   .any_delete .songType .dataTables_wrapper .dataTables_info,
+   .any_delete .allSinger .dataTables_wrapper .dataTables_info, 
+   .any_delete .singerSong .dataTables_wrapper .dataTables_info { display: none; }
+
+   .any_delete .dataTables_wrapper .dataTables_filter input { width: 125px; }
 /*5) any_delete end*/
 
 fieldset {
-   border: 1px groove skyblue !important;
+   border: 1px dashed skyblue !important;
    border-radius: 0.50rem;
    padding: 0 1em 1em 1em !important;
    margin: 0 0 1.5em 0 !important;
@@ -92,16 +129,17 @@ legend {
 .alert-success{ background-color: green; color: #fff; }
 .alert-danger{ background-color: red; color: #fff; }
 
-
 .footer {
   height: auto;   
   color: #fff;
   background-color: #2980b9;
 }
+
 .footer a{
    color: #fff;
    font-style: italic;
 }
+
 .footer ul li{
    list-style: none;
    display: inline-block;
@@ -115,3 +153,22 @@ legend {
 .footer ol, ul, li {
     margin-bottom: 0rem;
 }
+
+/*Datatable all page*/
+
+table.dataTable tbody tr { background-color: transparent; }
+
+.dataTables_wrapper .dataTables_length, .dataTables_filter, .dataTables_info, .dataTables_paginate {
+   background-color: cyan; border-radius: 2px;
+}
+.dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_paginate{ float: none; }
+
+/*Top*/
+.dataTables_wrapper .dataTables_length label, .dataTables_wrapper .dataTables_filter label{ padding: 0.175rem 0.5rem; margin-bottom: 0rem; }
+.dataTables_wrapper .dataTables_filter { margin-bottom: 0.20rem; }
+
+/*Buttom*/
+.dataTables_wrapper .dataTables_info { padding: 0.5rem; }
+.dataTables_wrapper .dataTables_paginate { padding: 0.25em; }
+.dataTables_wrapper .dataTables_paginate, .dataTables_wrapper .dataTables_info { margin-top: 0.20rem; }
+.dataTables_wrapper .dataTables_paginate .paginate_button { min-width: 1.5em; padding: 0.2em 0.6em; margin-left: 2px; }

@@ -9,18 +9,18 @@
                   <table class="table singer_list_table table-bordered">
                      <thead class="bg-info">
                         <tr class="text-center">
-                           <th>Serial</th>
-                           <th>Singer</th>
+                           <th idth="9%">No</th>
+                           <th width="20%">Singer</th>
                            <th>Song Type</th>
-                           <th>Country</th>
-                           <th>Gender</th>
+                           <th width="10%">Country</th>
+                           <th width="15%">Gender</th>
                            <th>Age</th>
                         </tr>
                      </thead>
                      <tbody>
-                     @forelse($SingerLists as $SingerList)  {{-- foreach don't have @empty option --}}
+                     @foreach($SingerLists as $SingerList)
                         <tr class="text-center">
-                           <td>{{$loop->index + $SingerLists->firstItem()}}</td>
+                           <td> {{$loop->index + 1}}  </td>
                            <td>
                               @if($SingerList->photo !=null)
 
@@ -28,7 +28,7 @@
                               <br>
                               @endif
 
-                              <span style="font-style: italic;"> {{$SingerList->singerName}}</span>
+                              <span class="singerName"> {{$SingerList->singerName}}</span>
                            </td>
                
                            <td>{{ $SingerList->singerList_RelationTo_Songtype->songType}}</td>
@@ -37,21 +37,15 @@
                            <td>
                               @if ($SingerList->dob!=null)
 
-                                <p>[ {{ \Carbon\Carbon::parse($SingerList->dob)->format('Y-M-d') }} ]
-                              </p>
+                                <p>[ {{ \Carbon\Carbon::parse($SingerList->dob)->format('Y-M-d') }} ]</p>
                                                           
                                  {{\Carbon\Carbon::parse($SingerList->dob)->diff(\Carbon\Carbon::now())->format(' %y years ')}}                              
                               @endif
                            </td>                                 
                         </tr>
-                      @empty
-                        <tr class="text-center text-danger">
-                           <td colspan="6">No data found...</td>
-                        </tr>
-                      @endforelse                                              
+                      @endforeach                                               
                         </tbody>
                   </table>
-                  {{ $SingerLists->links() }}                 
             </fieldset>
          </div>
       </div>      

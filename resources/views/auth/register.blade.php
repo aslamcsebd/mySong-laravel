@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+                <div class="card-header bg-info text-center text-light">{{ __('Register') }}</div>
 
                 {{-- N:B: route('register')
                 app\Http\Controllers\Auth\RegisterController.php --}}

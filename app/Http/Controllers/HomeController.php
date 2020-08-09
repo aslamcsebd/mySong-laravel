@@ -14,6 +14,26 @@ class HomeController extends Controller
      *
      * @return void
      */
+
+   public function login() {
+      if (false == Auth::check()) {
+         return redirect('auth/login');
+      }else{
+         $userId = Auth::user()->id;
+
+         $SongtypeCount = Songtype::where('userId', $userId)->get();
+         $Songtypes = Songtype::where('userId', $userId)->get();
+
+         $SingerListCount = SingerList::where('userId', $userId)->get();
+         $SingerLists = SingerList::where('userId', $userId)->get();
+         $When_All_Singer = true;
+         return view('home', compact('SongtypeCount', 'Songtypes', 'SingerListCount', 'SingerLists', 'When_All_Singer'));        
+      }
+   }
+
+
+
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -29,7 +49,7 @@ class HomeController extends Controller
    //1 all song button
    public function index(){
       $email = Auth::user()->email;      
-      $Songtypes = Songtype::where('email', $email)->get();
+      $Songtypes = Songtype::where('email', $email)->get();      
       // $SingerLists = SingerList::where('email', $email)->get();
       // return view('home', compact('Songtypes', 'SingerLists'));
       return view('home', compact('Songtypes'));
